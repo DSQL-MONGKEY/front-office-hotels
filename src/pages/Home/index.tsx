@@ -1,14 +1,23 @@
 /* eslint-disable prettier/prettier */
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
 import React from 'react';
 
 const Home = ({ navigation }: any) => {
    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-         <Text style={{ color: '#163020' }}>Home SCREEM</Text>
+      <View style={styles.container}>
+         <Text style={styles.text}>Home SCREEM</Text>
          <Button title="Coba" onPress={() => navigation.navigate('coba')} />
       </View>
    );
  };
+
+const styles = StyleSheet.create({
+   container:{
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+   },
+   text:{ color: '#163020' },
+});
 
 export default Home;
