@@ -13,17 +13,16 @@ const Tab = createBottomTabNavigator();
 
 const MainApp = () => {
    return (
-      <Tab.Navigator initialRouteName="Splash">
-         <Tab.Screen name="Splash" component={Splash} />
-         <Tab.Screen name="Home" component={Home} />
-         <Tab.Screen name="Order" component={Order} />
-         <Tab.Screen name="Account" component={Account} />
+      <Tab.Navigator>
+         <Tab.Screen name="Home" component={Home} options={{ headerShown: false }}/>
+         <Tab.Screen name="Order" component={Order} options={{ headerShown: false }} />
+         <Tab.Screen name="Account" component={Account} options={{ headerShown: false }} />
       </Tab.Navigator>
    );
 };
 const Router = () => {
    return (
-      <Stack.Navigator initialRouteName="MainApp">
+      <Stack.Navigator initialRouteName="Splash">
          <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
          <Stack.Screen name="MainApp" component={MainApp} options={{ headerShown: false }} />
       </Stack.Navigator>

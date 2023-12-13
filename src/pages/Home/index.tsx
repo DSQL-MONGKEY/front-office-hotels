@@ -6,7 +6,7 @@ const Home = ({ navigation }: any) => {
    return (
       <View style={styles.container}>
          <Text style={styles.text}>Home SCREEM</Text>
-         <Button title="Coba" onPress={() => navigation.navigate('coba')} />
+         <Button title="Account" onPress={() => navigation.navigate('Account')} />
       </View>
    );
  };
