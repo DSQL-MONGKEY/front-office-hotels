@@ -1,31 +1,43 @@
 /* eslint-disable prettier/prettier */
 import React, { useEffect } from 'react';
-import { Image, ImageBackground, StyleSheet } from 'react-native';
-import { bgSplash, logo } from '../../assets';
+import { Animated, StyleSheet, View } from 'react-native';
+import { logo } from '../../assets';
 
 const Splash = ({ navigation }: any) => {
 
-   // useEffect(() => {
-   //    setTimeout(() => {
-   //       navigation.replace('MainApp');
-   //    }, 3000);
-   // }, [navigation]);
+   useEffect(() => {
+      setTimeout(() => {
+         navigation.replace('MainApp');
+      }, 2300);
+   }, [navigation]);
+
+   const imageScale = new Animated.Value(0.1);
+   Animated.timing(imageScale, {
+      toValue: 1,
+      duration: 1300,
+      useNativeDriver: true,
+   }).start();
 
    return (
-      <ImageBackground source={bgSplash} style={styles.background}>
-         <Image source={logo} style={styles.logo} />
-      </ImageBackground>
+      <View style={styles.container}>
+         <Animated.Image
+            source={logo}
+            style={[styles.logo, { transform: [{scale: imageScale}] }]}
+         />
+      </View>
    );
 };
 
 const styles = StyleSheet.create({
-   background: {
+   container: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
+      backgroundColor: '#89ADE2',
    },
    logo: {
-      top: -50,
+      width: 200,
+      height: 200,
    },
 });
 
