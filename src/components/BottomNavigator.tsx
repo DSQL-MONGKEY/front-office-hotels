@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import TabItem from './TabItem';
 
 
@@ -58,11 +58,10 @@ export default BottomNavigator;
 const styles = StyleSheet.create({
    container: {
       flexDirection: 'row',
-      backgroundColor: '#FFFFFF',
+      backgroundColor: '#ffffff',
       justifyContent: 'space-between',
-      paddingHorizontal: 55,
+      paddingHorizontal: 20,
       paddingVertical: 14,
-
    },
    touchAble: {flex: 1},
 });
