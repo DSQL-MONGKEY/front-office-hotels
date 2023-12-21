@@ -11,8 +11,8 @@ const Splash = ({ navigation }: any) => {
       }, 2300);
    }, [navigation]);
 
-   const imageScale = new Animated.Value(0.1);
-   Animated.timing(imageScale, {
+   const imageOpacity = new Animated.Value(0.1);
+   Animated.timing(imageOpacity, {
       toValue: 1,
       duration: 1300,
       useNativeDriver: true,
@@ -22,7 +22,7 @@ const Splash = ({ navigation }: any) => {
       <View style={styles.container}>
          <Animated.Image
             source={logo}
-            style={[styles.logo, { transform: [{scale: imageScale}] }]}
+            style={[styles.logo, {opacity: imageOpacity}]}
          />
       </View>
    );
