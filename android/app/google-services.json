@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "346237848632",
+    "project_id": "fo-dashboard-57ffc",
+    "storage_bucket": "fo-dashboard-57ffc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346237848632:android:9bba198f1f542b1ad9eacd",
+        "android_client_info": {
+          "package_name": "com.frontofficeapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDM-8ZtWZNXxSLspA3Wm1sir_TOzb_12c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
