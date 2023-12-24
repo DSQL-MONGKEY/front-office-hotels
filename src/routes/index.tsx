@@ -2,7 +2,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
@@ -12,6 +12,7 @@ import Account from '../pages/Account';
 import { BottomNavigator } from '../components';
 import GuestList from '../pages/GuestList';
 import Service from '../pages/Service';
+import RoomDetails from '../pages/Details/RoomDetails';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -22,7 +23,7 @@ const MainApp = () => {
          <Tab.Screen
             name="Home"
             component={Home}
-            options={{ headerShown: false}}
+            options={{ headerShown: false }}
             />
          <Tab.Screen
             name="Guest list"
@@ -42,9 +43,13 @@ const MainApp = () => {
 };
 const Router = () => {
    return (
-      <Stack.Navigator initialRouteName="Splash">
+      <Stack.Navigator initialRouteName="Splash"  screenOptions={{
+         gestureEnabled: true,
+         ...TransitionPresets.SlideFromRightIOS,
+      }}>
          <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
          <Stack.Screen name="MainApp" component={MainApp} options={{ headerShown: false }} />
+         <Stack.Screen name="RoomDetails" component={RoomDetails} options={{ headerShown: false }}/>
       </Stack.Navigator>
    );
 };
