@@ -44,7 +44,6 @@ const MainApp = () => {
 const Router = () => {
    return (
       <Stack.Navigator initialRouteName="Splash"  screenOptions={{
-         gestureEnabled: true,
          ...TransitionPresets.SlideFromRightIOS,
       }}>
          <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
