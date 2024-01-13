@@ -1,18 +1,46 @@
 /* eslint-disable prettier/prettier */
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text} from 'react-native';
 import React from 'react';
-import { Card } from 'react-native-paper';
+import { Card, TouchableRipple } from 'react-native-paper';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 // interface roomListProps {
 // }
 
-const RoomList = ({ id, roomName, imageBanner, images }: any ) => {
-
+const RoomList = ({ id, roomName, imageBanner, images, facility, qtyPerson, price, navigation }: any ) => {
+   console.log(price);
    return (
-      <Card key={id} style={styles.card}>
-            <Card.Title title={roomName} titleStyle={styles.text} />
-         <Card.Cover source={imageBanner} />
-      </Card>
+      <SafeAreaView>
+         <Card
+            key={id}
+            style={styles.card}
+            onPress={() => navigation.navigate('RoomDetails', {
+               roomName,
+               images,
+               facility,
+               qtyPerson,
+               price,
+               })}>
+            <TouchableRipple
+               rippleColor="rgba(0, 0, 0, .32)"
+            >
+            <Card.Content style={styles.content}>
+               <Text style={styles.title}>
+                  {roomName}
+               </Text>
+               <Text style={styles.title}>
+                  {qtyPerson}
+                  <Ionicons
+                     name="person-outline"
+                     style={styles.icon} />
+               </Text>
+            </Card.Content>
+            </TouchableRipple>
+            <Card.Cover source={imageBanner} />
+         </Card>
+      </SafeAreaView>
    );
 };
 
@@ -34,7 +62,20 @@ const styles = StyleSheet.create({
       borderEndEndRadius: 20,
    },
 
-   text: {
+   content: {
+      flex:2,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+   },
+
+   icon: {
+      fontSize: 15,
+   },
+
+   title: {
+      margin: 10,
+      fontSize: 17,
       color: '#161A30',
+      fontFamily: 'Poppins-Medium',
    },
 });
