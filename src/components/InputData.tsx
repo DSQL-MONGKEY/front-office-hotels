@@ -1,25 +1,75 @@
 /* eslint-disable prettier/prettier */
 import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { TextInput } from 'react-native-paper';
+import DateTimePicker from 'react-native-ui-datepicker';
+import dayjs from 'dayjs';
 
 interface InputDataProps {
+   type?: string,
    label: React.ReactNode,
    placeholder: string,
+   eventHandler?: void,
 }
 
-const InputData = ({ label, placeholder }: InputDataProps) => {
+const InputData = ({ type, label, placeholder, eventHandler }: InputDataProps) => {
+   const [dateValue, setDateValue] = useState(dayjs());
+   console.log(dateValue)
+
+   if (type === 'date') {
+      return (
+         <View style={styles.dateContainer}>
+            <DateTimePicker
+            value={dateValue}
+            onValueChange={date => setDateValue(date)}
+            displayFullDays={true}
+            headerTextStyle={styles.calenderTextStyles}
+            calendarTextStyle={styles.calenderTextStyles}
+            weekDaysTextStyle={styles.calenderTextStyles}
+            headerButtonColor={'#86A7FC'}
+            selectedItemColor={'#86A7FC'}
+            locale={'id'}
+            />
+         </View>
+      );
+   }
+
    return (
-      <>
-         <Text>{label}</Text>
+      <View>
+         <Text style={styles.label}>{label}</Text>
          <TextInput
+            theme={{ roundness: 10 }}
+            contentStyle={styles.contentStyle}
+            style={styles.textInput}
             placeholder={placeholder}
+            focusable={true}
             mode="outlined"
          />
-      </>
+      </View>
    );
 };
 
 export default InputData;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+   label: {
+      fontSize: 20,
+      color: 'black',
+      fontFamily: 'Quicksand-Bold',
+   },
+   textInput: {
+      backgroundColor: '#f8f9fa',
+   },
+   contentStyle: {
+      color: '#343a40',
+      fontFamily: 'Quicksand-Bold',
+   },
+
+   dateContainer: {
+      backgroundColor: 'white',
+      borderRadius: 20,
+   },
+   calenderTextStyles: {
+      color: 'black',
+   },
+});
