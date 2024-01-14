@@ -1,12 +1,17 @@
 /* eslint-disable prettier/prettier */
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import React from 'react';
+import { TouchableRipple } from 'react-native-paper';
 
 const Service = () => {
    return (
-      <View style={styles.container}>
-         <Text>Service</Text>
-      </View>
+      <TouchableRipple
+         onPress={() => console.log('Pressed')}
+         rippleColor="rgba(0, 0, 0, .32)"
+         style={styles.container}
+      >
+      <Text>Press anywhere</Text>
+      </TouchableRipple>
    );
 };
 
