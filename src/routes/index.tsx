@@ -13,6 +13,7 @@ import { BottomNavigator } from '../components';
 import GuestList from '../pages/GuestList';
 import Service from '../pages/Service';
 import RoomDetails from '../pages/Details/RoomDetails';
+import Icon from '../components/Icon';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -23,7 +24,10 @@ const MainApp = () => {
          <Tab.Screen
             name="Home"
             component={Home}
-            options={{ headerShown: false }}
+            options={{
+               headerTitle: () => <Icon   />,
+               headerTitleAlign: 'center',
+            }}
             />
          <Tab.Screen
             name="Guest list"
@@ -48,10 +52,12 @@ const Router = () => {
       }}>
          <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
          <Stack.Screen name="MainApp" component={MainApp} options={{ headerShown: false }} />
-         <Stack.Screen name="RoomDetails" component={RoomDetails} options={{ headerShown: false }}/>
+         <Stack.Screen name="RoomDetails" component={RoomDetails} options={{
+            headerTitle: () => <Icon />,
+            headerTitleAlign: 'center',
+         }}/>
       </Stack.Navigator>
    );
 };
 
 export default Router;
-
