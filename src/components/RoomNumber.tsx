@@ -21,7 +21,6 @@ const RoomNumber = () => {
 const RenderItem = ({ item }): any => {
    const [selectedRoom, setSelectedRoom] = useState('');
    const [active, setActive] = useState(false);
-   console.log(selectedRoom);
 
    const handelSelect = () => {
       setSelectedRoom(item.id);
