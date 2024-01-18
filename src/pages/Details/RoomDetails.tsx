@@ -1,17 +1,42 @@
 /* eslint-disable prettier/prettier */
-import React, { useEffect, useRef, useState } from 'react';
-import { FlatList, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native';
+import React from 'react';
+import { FlatList, ScrollView, StyleSheet, View } from 'react-native';
 import InputData from '../../components/InputData';
 import RoomInfo from '../../components/RoomInfo';
 import ImageCarousel from '../../components/ImageCarousel';
 import RoomNumber from '../../components/RoomNumber';
 import { Divider } from 'react-native-paper';
+import { useGuestDataStore } from '../../state';
 
 const RoomDetails = ({ route }: any) => {
    // Get data from navigation params
    const { qtyPerson, roomName, images, facility, price } = route.params;
    // Event Handler
    const handleRenderItem = ({ item }: any) => <ImageCarousel images={item} />;
+
+   //state event handler
+   const guestName = useGuestDataStore((state) => state.guestName);
+   const updateGuestName = useGuestDataStore((state) => state.updateGuestName);
+
+   const email = useGuestDataStore((state) => state.email);
+   const updateEmail = useGuestDataStore((state) => state.updateEmail);
+
+   const phoneNum = useGuestDataStore(state => state.phoneNumber);
+   const updatePhoneNum = useGuestDataStore(state => state.updatePhoneNumber);
+
+   const address = useGuestDataStore(state => state.address);
+   const updateAddress = useGuestDataStore(state => state.updateAddress);
+
+   const deposit = useGuestDataStore(state => state.deposit);
+   const updateDeposit = useGuestDataStore(state => state.updateDeposit);
+
+   const addServices = useGuestDataStore(state => state.addServices);
+   const updateAddServices = useGuestDataStore(state => state.updateAddServices);
+
+   const date = useGuestDataStore(state => state.date);
+   const updateDate = useGuestDataStore(state => state.updateDate);
+
+   console.log(useGuestDataStore(state => state));
 
    return (
       <ScrollView style={styles.container}>
@@ -34,20 +59,51 @@ const RoomDetails = ({ route }: any) => {
          <View style={styles.innerContainer}>
             <InputData
                label={'Guest Name'}
-               placeholder={'Enter guest name'} />
+               placeholder={'Enter guest name'}
+               value={guestName}
+               onChangeEvent={(e) => updateGuestName(e)}
+               />
             <InputData
+               type={'email'}
+               label={'Email'}
+               placeholder={'Enter email'}
+               value={email}
+               onChangeEvent={updateEmail}
+               />
+            <InputData
+               type={'tel'}
+               label={'Phone Number'}
+               placeholder={'Enter phone number'}
+               value={phoneNum}
+               onChangeEvent={updatePhoneNum}
+               />
+            <InputData
+               type={'services'}
                label={'Address'}
-               placeholder={'Enter address'} />
+               placeholder={'Enter address'}
+               value={address}
+               onChangeEvent={updateAddress}
+               />
             <InputData
+               type={'deposit'}
                label={'Deposit'}
-               placeholder={'Enter deposit'} />
+               placeholder={'Enter deposit'}
+               value={deposit}
+               onChangeEvent={updateDeposit}
+               />
             <InputData
                label={'Additional Services'}
-               placeholder={'Enter services'} />
+               placeholder={'Enter services'}
+               value={addServices}
+               onChangeEvent={updateAddServices}
+               />
             <InputData
                type="date"
-               label={'Additional Services'}
-               placeholder={'Enter services'} />
+               label={'Date'}
+               placeholder={'Enter date'}
+               value={date}
+               onChangeEvent={updateDate}
+               />
          </View>
       </ScrollView>
    );
