@@ -38,6 +38,7 @@ const RenderItem = ({ item }): any => {
          {backgroundColor: item.status ? '#86A7FC' : '#FF2E63'},
          {backgroundColor: active ? 'black' : '#86A7FC'},
          ]}
+         disabled={!item.status}
          onPress={handelSelect}
          >
          <Text style={[styles.text]}>{item.id}</Text>
@@ -55,6 +56,8 @@ const styles = StyleSheet.create({
       width: '100%',
       padding: 5,
       borderRadius: 10,
+      borderWidth:1,
+      borderColor: '#7D5A50',
    },
    itemContainer: {
       flex: 1,
