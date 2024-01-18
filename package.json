@@ -55,5 +55,8 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "resolutions": {
+    "react-native-reanimated": "^3.6.1"
   }
 }
