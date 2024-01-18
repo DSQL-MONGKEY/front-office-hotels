@@ -1,27 +1,27 @@
 /* eslint-disable prettier/prettier */
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 import React, { useState } from 'react';
-import { TextInput } from 'react-native-paper';
-import DateTimePicker from 'react-native-ui-datepicker';
+import DateTimePicker, { DateType } from 'react-native-ui-datepicker';
 import dayjs from 'dayjs';
-
 interface InputDataProps {
    type?: string,
    label: React.ReactNode,
    placeholder: string,
-   eventHandler?: void,
+   value: string,
+   onChangeEvent: (e: string & DateType) => void
 }
 
-const InputData = ({ type, label, placeholder, eventHandler }: InputDataProps) => {
+const InputData = ({ type, label, placeholder, value, onChangeEvent }: InputDataProps) => {
    const [dateValue, setDateValue] = useState(dayjs());
-   console.log(dateValue)
 
    if (type === 'date') {
       return (
          <View style={styles.dateContainer}>
             <DateTimePicker
             value={dateValue}
-            onValueChange={date => setDateValue(date)}
+            onValueChange={(date: string) => (
+               onChangeEvent(date)
+            )}
             displayFullDays={true}
             headerTextStyle={styles.calenderTextStyles}
             calendarTextStyle={styles.calenderTextStyles}
@@ -34,17 +34,111 @@ const InputData = ({ type, label, placeholder, eventHandler }: InputDataProps) =
       );
    }
 
+   if (type === 'deposit') {
+      return (
+         <View>
+            <Text style={styles.label}>{label}</Text>
+            <TextInput
+               value={value}
+               onChangeText={onChangeEvent}
+               inputMode={'numeric'}
+               placeholder={placeholder}
+               autoCapitalize={'none'}
+               style={[styles.contentStyle, styles.textInput]}
+               allowFontScaling
+               autoComplete={'cc-number'}
+               />
+         </View>
+      );
+   }
+   if (type === 'email') {
+      return (
+         <View>
+            <Text style={styles.label}>{label}</Text>
+            <TextInput
+               value={value}
+               onChangeText={onChangeEvent}
+               inputMode={'email'}
+               placeholder={placeholder}
+               autoCapitalize={'none'}
+               style={[styles.contentStyle, styles.textInput]}
+               allowFontScaling
+               autoComplete={'cc-number'}
+               />
+         </View>
+      );
+   }
+   if (type === 'tel') {
+      return (
+         <View>
+            <Text style={styles.label}>{label}</Text>
+            <TextInput
+               value={value}
+               onChangeText={onChangeEvent}
+               inputMode={'tel'}
+               placeholder={placeholder}
+               autoCapitalize={'none'}
+               style={[styles.contentStyle, styles.textInput]}
+               allowFontScaling
+               autoComplete={'cc-number'}
+               maxLength={13}
+               />
+         </View>
+      );
+   }
+   if (type === 'address') {
+      return (
+         <View>
+            <Text style={styles.label}>{label}</Text>
+            <TextInput
+               value={value}
+               onChangeText={onChangeEvent}
+               inputMode={'text'}
+               placeholder={placeholder}
+               autoCapitalize={'none'}
+               style={[styles.contentStyle, styles.textInput]}
+               allowFontScaling
+               />
+         </View>
+      );
+   }
+   if (type === 'services') {
+      return (
+         <View>
+            <Text style={styles.label}>{label}</Text>
+            <TextInput
+               value={value}
+               onChangeText={onChangeEvent}
+               inputMode={'text'}
+               placeholder={placeholder}
+               autoCapitalize={'none'}
+               style={[styles.contentStyle, styles.textInput]}
+               allowFontScaling
+               />
+         </View>
+      );
+   }
+
    return (
       <View>
          <Text style={styles.label}>{label}</Text>
          <TextInput
+            value={value}
+            onChangeText={onChangeEvent}
+            inputMode={'text'}
+            placeholder={placeholder}
+            autoCapitalize={'words'}
+            style={[styles.contentStyle, styles.textInput]}
+            allowFontScaling
+         />
+         {/* <TextInput
             theme={{ roundness: 10 }}
             contentStyle={styles.contentStyle}
             style={styles.textInput}
             placeholder={placeholder}
             focusable={true}
             mode="outlined"
-         />
+         /> */}
       </View>
    );
 };
@@ -59,10 +153,14 @@ const styles = StyleSheet.create({
    },
    textInput: {
       backgroundColor: '#f8f9fa',
+      fontSize: 17,
    },
    contentStyle: {
       color: '#343a40',
       fontFamily: 'Quicksand-Bold',
+      borderWidth: 1,
+      borderRadius: 10,
+      paddingHorizontal: 10,
    },
 
    dateContainer: {
