@@ -19,7 +19,7 @@ const InputData = ({ type, label, placeholder, value, onChangeEvent }: InputData
          <View style={styles.dateContainer}>
             <DateTimePicker
             value={dateValue}
-            onValueChange={(date: string) => (
+            onValueChange={(date: any) => (
                onChangeEvent(date)
             )}
             displayFullDays={true}
