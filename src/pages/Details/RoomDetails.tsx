@@ -7,6 +7,7 @@ import ImageCarousel from '../../components/ImageCarousel';
 import RoomNumber from '../../components/RoomNumber';
 import { Divider } from 'react-native-paper';
 import { useGuestDataStore } from '../../state';
+import BottomSheet from '../../components/BottomSheet';
 
 const RoomDetails = ({ route }: any) => {
    // Get data from navigation params
@@ -39,6 +40,7 @@ const RoomDetails = ({ route }: any) => {
    console.log(useGuestDataStore(state => state));
 
    return (
+      <>
       <ScrollView style={styles.container}>
          <View style={styles.carouselContainer}>
             <FlatList
@@ -105,7 +107,9 @@ const RoomDetails = ({ route }: any) => {
                onChangeEvent={updateDate}
                />
          </View>
+      <BottomSheet/>
       </ScrollView>
+      </>
    );
 };
 
