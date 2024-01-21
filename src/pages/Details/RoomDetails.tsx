@@ -1,19 +1,26 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
-import { FlatList, ScrollView, StyleSheet, View } from 'react-native';
+import React, { useState } from 'react';
+import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
 import InputData from '../../components/InputData';
 import RoomInfo from '../../components/RoomInfo';
 import ImageCarousel from '../../components/ImageCarousel';
 import RoomNumber from '../../components/RoomNumber';
-import { Divider } from 'react-native-paper';
+import { Button, Divider } from 'react-native-paper';
 import { useGuestDataStore } from '../../state';
-import BottomSheet from '../../components/BottomSheet';
+import ModalBottom from '../../components/ModalBottom';
 
 const RoomDetails = ({ route }: any) => {
+   const [isConfirm, setIsConfirm] = useState(false);
    // Get data from navigation params
    const { qtyPerson, roomName, images, facility, price } = route.params;
    // Event Handler
    const handleRenderItem = ({ item }: any) => <ImageCarousel images={item} />;
+   const handleConfirm = () => {
+      setIsConfirm(true);
+      if (isConfirm) {
+         setIsConfirm(false);
+      }
+   };
 
    //state event handler
    const guestName = useGuestDataStore((state) => state.guestName);
@@ -39,76 +46,82 @@ const RoomDetails = ({ route }: any) => {
 
    console.log(useGuestDataStore(state => state));
 
+
    return (
       <>
-      <ScrollView style={styles.container}>
-         <View style={styles.carouselContainer}>
-            <FlatList
-               data={images}
-               keyExtractor={item => item.id}
-               renderItem={handleRenderItem}
-               horizontal={true}
-               pagingEnabled={true}
-               showsHorizontalScrollIndicator={false}
-               />
-         </View>
-         <RoomInfo qtyPerson={qtyPerson} roomName={roomName}
-         facility={facility} price={price} />
-         <Divider horizontalInset />
-         <View style={styles.innerContainer}>
-            <RoomNumber/>
-         </View>
-         <View style={styles.innerContainer}>
-            <InputData
-               label={'Guest Name'}
-               placeholder={'Enter guest name'}
-               value={guestName}
-               onChangeEvent={(e) => updateGuestName(e)}
-               />
-            <InputData
-               type={'email'}
-               label={'Email'}
-               placeholder={'Enter email'}
-               value={email}
-               onChangeEvent={updateEmail}
-               />
-            <InputData
-               type={'tel'}
-               label={'Phone Number'}
-               placeholder={'Enter phone number'}
-               value={phoneNum}
-               onChangeEvent={updatePhoneNum}
-               />
-            <InputData
-               type={'services'}
-               label={'Address'}
-               placeholder={'Enter address'}
-               value={address}
-               onChangeEvent={updateAddress}
-               />
-            <InputData
-               type={'deposit'}
-               label={'Deposit'}
-               placeholder={'Enter deposit'}
-               value={deposit}
-               onChangeEvent={updateDeposit}
-               />
-            <InputData
-               label={'Additional Services'}
-               placeholder={'Enter services'}
-               value={addServices}
-               onChangeEvent={updateAddServices}
-               />
-            <InputData
-               type="date"
-               label={'Date'}
-               placeholder={'Enter date'}
-               value={date}
-               onChangeEvent={updateDate}
-               />
-         </View>
-      <BottomSheet/>
-      </ScrollView>
+         <ScrollView style={styles.container}>
+            <View style={styles.carouselContainer}>
+               <FlatList
+                  data={images}
+                  keyExtractor={item => item.id}
+                  renderItem={handleRenderItem}
+                  horizontal={true}
+                  pagingEnabled={true}
+                  showsHorizontalScrollIndicator={false}
+                  />
+            </View>
+            <RoomInfo qtyPerson={qtyPerson} roomName={roomName}
+            facility={facility} price={price} />
+            <Divider horizontalInset />
+            <View style={styles.innerContainer}>
+               <RoomNumber/>
+            </View>
+            <View style={styles.innerContainer}>
+               <InputData
+                  label={'Guest Name'}
+                  placeholder={'Enter guest name'}
+                  value={guestName}
+                  onChangeEvent={(e) => updateGuestName(e)}
+                  />
+               <InputData
+                  type={'email'}
+                  label={'Email'}
+                  placeholder={'Enter email'}
+                  value={email}
+                  onChangeEvent={updateEmail}
+                  />
+               <InputData
+                  type={'tel'}
+                  label={'Phone Number'}
+                  placeholder={'Enter phone number'}
+                  value={phoneNum}
+                  onChangeEvent={updatePhoneNum}
+                  />
+               <InputData
+                  type={'services'}
+                  label={'Address'}
+                  placeholder={'Enter address'}
+                  value={address}
+                  onChangeEvent={updateAddress}
+                  />
+               <InputData
+                  type={'deposit'}
+                  label={'Deposit'}
+                  placeholder={'Enter deposit'}
+                  value={deposit}
+                  onChangeEvent={updateDeposit}
+                  />
+               <InputData
+                  label={'Additional Services'}
+                  placeholder={'Enter services'}
+                  value={addServices}
+                  onChangeEvent={updateAddServices}
+                  />
+               <InputData
+                  type="date"
+                  label={'Date'}
+                  placeholder={'Enter date'}
+                  value={date}
+                  onChangeEvent={updateDate}
+                  />
+            </View>
+            <Button contentStyle={styles.button} onPress={handleConfirm}>
+               <Text style={styles.buttonText}>Confirm</Text>
+            </Button>
+         </ScrollView>
+         {isConfirm &&
+            <ModalBottom/>
+         }
       </>
    );
 };
@@ -129,5 +142,21 @@ const styles = StyleSheet.create({
 
    textInput: {
       borderRadius: 20,
+   },
+   button: {
+      backgroundColor: '#86A7FC',
+      marginHorizontal: 20,
+      marginVertical: 10,
+      height: 60,
+      flex:1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 20,
+   },
+   buttonText: {
+      fontSize: 20,
+      padding: 50,
+      fontFamily: 'Quicksand-Bold',
+      color: 'white',
    },
 });
