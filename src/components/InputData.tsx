@@ -12,16 +12,16 @@ interface InputDataProps {
 }
 
 const InputData = ({ type, label, placeholder, value, onChangeEvent }: InputDataProps) => {
-   const [dateValue, setDateValue] = useState(dayjs());
+   const [dateValue] = useState(dayjs());
 
    if (type === 'date') {
       return (
          <View style={styles.dateContainer}>
             <DateTimePicker
             value={dateValue}
-            onValueChange={(date: any) => (
-               onChangeEvent(date)
-            )}
+            onValueChange={(date: any) => {
+                  onChangeEvent(date);
+            }}
             displayFullDays={true}
             headerTextStyle={styles.calenderTextStyles}
             calendarTextStyle={styles.calenderTextStyles}
@@ -131,14 +131,6 @@ const InputData = ({ type, label, placeholder, value, onChangeEvent }: InputData
             style={[styles.contentStyle, styles.textInput]}
             allowFontScaling
          />
-         {/* <TextInput
-            theme={{ roundness: 10 }}
-            contentStyle={styles.contentStyle}
-            style={styles.textInput}
-            placeholder={placeholder}
-            focusable={true}
-            mode="outlined"
-         /> */}
       </View>
    );
 };
