@@ -1,10 +1,10 @@
-/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
 import { availableRoomId } from '../constants/constants';
 import { FlatList } from 'react-native-gesture-handler';
 import { Button } from 'react-native-paper';
+import { useGuestDataStore } from '../state';
 
 const RoomNumber = () => {
    return (
@@ -18,31 +18,36 @@ const RoomNumber = () => {
    );
 };
 
-const RenderItem = ({ item }): any => {
+
+const RenderItem = ({ item }: any) => {
    const [selectedRoom, setSelectedRoom] = useState('');
    const [active, setActive] = useState(false);
+   const updateRoomNumber = useGuestDataStore((state) => state.roomNumber);
+   console.log(updateRoomNumber);
 
    const handelSelect = () => {
       setSelectedRoom(item.id);
       setActive(true);
+      item.status = active;
       if (active) {
          setSelectedRoom('');
          setActive(false);
+         item.status = active;
       }
    };
    return (
       <View style={styles.itemContainer}>
          <Button
-         style={
-         [styles.itemContainer,
-         {backgroundColor: item.status ? '#86A7FC' : '#FF2E63'},
-         {backgroundColor: active ? 'black' : '#86A7FC'},
-         ]}
-         disabled={!item.status}
-         onPress={handelSelect}
+            style={
+            [
+               styles.itemContainer,
+               {backgroundColor: item.status ? '#86A7FC' : '#FF2E63'},
+               {backgroundColor: active ? 'black' : '#86A7FC'},
+            ]}
+            onPress={handelSelect}
          >
          <Text style={[styles.text]}>{item.id}</Text>
-      </Button>
+         </Button>
       </View>
    );
 };
