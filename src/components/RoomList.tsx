@@ -3,26 +3,27 @@ import { StyleSheet, Text} from 'react-native';
 import React from 'react';
 import { Card, TouchableRipple } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
-// interface roomListProps {
-// }
+import { useGuestDataStore } from '../state';
 
 const RoomList = ({ id, roomName, imageBanner, images, facility, qtyPerson, price, navigation }: any ) => {
-   console.log(price);
+
+   const updateRoomType = useGuestDataStore((state) => state.updateRoomType);
    return (
       <SafeAreaView>
          <Card
             key={id}
             style={styles.card}
-            onPress={() => navigation.navigate('RoomDetails', {
-               roomName,
-               images,
-               facility,
-               qtyPerson,
-               price,
-               })}>
+            onPress={() =>   {
+               navigation.navigate('RoomDetails', {
+                  roomName,
+                  images,
+                  facility,
+                  qtyPerson,
+                  price,
+               });
+               updateRoomType(roomName);
+            }}>
             <TouchableRipple
                rippleColor="rgba(0, 0, 0, .32)"
             >
