@@ -1,12 +1,22 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable prettier/prettier */
 import { Image, StyleSheet, View } from 'react-native';
 import React from 'react';
-import { logoBrandBlue } from '../assets';
+import { logo, logoBrandBlue } from '../assets';
 
+interface IconProps {
+   type: string
+}
 
-const Icon = () => {
+const Icon = ({ type }: IconProps) => {
+
+   if (type === 'text') {
+      return (
+         <View style={styles.container}>
+            <Image source={logo} style={styles.logo} />
+         </View>
+      );
+   }
 
    return (
       <View style={styles.container}>
