@@ -2,7 +2,7 @@
 import { View, StyleSheet, FlatList } from 'react-native';
 import React from 'react';
 import { roomList } from '../../constants/constants';
-import RoomList from '../../components/room/RoomList';
+import RoomList from '../../components/content/RoomList';
 
 const Home = ({ navigation }: any) => {
    return (
