@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { useGuestDataStore } from '../state';
+import { useGuestDataStore } from '../../state';
 import { Divider } from 'react-native-paper';
-import Icon from './Icon';
+import Icon from '../Icon';
 
 const Invoice = () => {
    const guestName = useGuestDataStore((state) => state.guestName);
@@ -50,7 +50,7 @@ const Invoice = () => {
                <Text style={styles.text}>Rp. {deposit}</Text>
             </View>
             <View style={styles.itemContainer}>
-               <Text style={styles.text}>+ Services: </Text>
+               <Text style={styles.text}>Services+ : </Text>
             <Text style={[styles.text, styles.wrap]}>{addServices}</Text>
             </View>
             <View style={styles.itemContainer}>

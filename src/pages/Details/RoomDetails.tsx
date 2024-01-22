@@ -1,13 +1,13 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
 import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
-import InputData from '../../components/InputData';
-import RoomInfo from '../../components/RoomInfo';
-import ImageCarousel from '../../components/ImageCarousel';
-import RoomNumber from '../../components/RoomNumber';
+import InputData from '../../components/room/InputData';
+import RoomInfo from '../../components/room/RoomInfo';
+import ImageCarousel from '../../components/room/ImageCarousel';
+import RoomNumber from '../../components/room/RoomNumber';
 import { Button, Divider } from 'react-native-paper';
 import { useGuestDataStore } from '../../state';
-import ModalBottom from '../../components/ModalBottom';
+import ModalBottom from '../../components/room/ModalBottom';
 
 const RoomDetails = ({ route }: any) => {
    const [isConfirm, setIsConfirm] = useState(false);

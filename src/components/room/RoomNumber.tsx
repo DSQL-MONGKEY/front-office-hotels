@@ -1,10 +1,10 @@
 /* eslint-disable prettier/prettier */
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
-import { availableRoomId } from '../constants/constants';
+import { availableRoomId } from '../../constants/constants';
 import { FlatList } from 'react-native-gesture-handler';
 import { Button } from 'react-native-paper';
-import { useGuestDataStore } from '../state';
+import { useGuestDataStore } from '../../state';
 
 const RoomNumber = () => {
    return (

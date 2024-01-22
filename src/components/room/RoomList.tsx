@@ -4,7 +4,7 @@ import React from 'react';
 import { Card, TouchableRipple } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { useGuestDataStore } from '../state';
+import { useGuestDataStore } from '../../state';
 
 const RoomList = ({ id, roomName, imageBanner, images, facility, qtyPerson, price, navigation }: any ) => {
 

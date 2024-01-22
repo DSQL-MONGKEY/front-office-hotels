@@ -25,7 +25,7 @@ const MainApp = () => {
             name="Home"
             component={Home}
             options={{
-               headerTitle: () => <Icon   />,
+               headerTitle: () => <Icon  />,
                headerTitleAlign: 'center',
             }}
             />

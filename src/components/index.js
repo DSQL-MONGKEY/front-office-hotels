@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
-import BottomNavigator from './BottomNavigator';
-import TabItem from './TabItem';
-import RoomList from './RoomList';
+import BottomNavigator from './navigation/BottomNavigator';
+import TabItem from './navigation/TabItem';
+import RoomList from './room/RoomList';
 
 export {
    BottomNavigator,

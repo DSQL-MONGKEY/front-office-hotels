@@ -5,7 +5,7 @@ import React from 'react';
 import { logo, logoBrandBlue } from '../assets';
 
 interface IconProps {
-   type: string
+   type?: string
 }
 
 const Icon = ({ type }: IconProps) => {
