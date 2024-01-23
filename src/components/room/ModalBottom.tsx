@@ -1,26 +1,41 @@
 /* eslint-disable prettier/prettier */
 import React, { useMemo, useRef } from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import Invoice from './Invoice';
 import { Button } from 'react-native-paper';
 import { Text } from 'react-native';
+import InputData from './InputData';
+import { useGuestDataStore } from '../../state';
 
 const ModalBottom = () => {
-   const snapPoints = useMemo(() => ['25%', '50%', '85%'], []);
+   const snapPoints = useMemo(() => ['25%', '50%', '75%', '100%'], []);
    const bottomSheetRef = useRef(null);
+
+   const cashAmount = useGuestDataStore((state) => state.cashAmount);
+   const updateCashAmount = useGuestDataStore((state) => state.updateCashAmount);
 
    return (
       <BottomSheet
          ref={bottomSheetRef}
          snapPoints={snapPoints}
+
       >
-         <View style={styles.contentContainer}>
-            <Invoice />
-            <Button contentStyle={styles.button} onPress={() => {}}>
-                  <Text style={styles.buttonText}>Confirm</Text>
-            </Button>
-         </View>
+         <ScrollView>
+            <View style={styles.contentContainer}>
+               <Invoice />
+               <InputData
+                  type={'cash'}
+                  label={'Cash'}
+                  placeholder={'Enter amount'}
+                  value={cashAmount}
+                  onChangeEvent={updateCashAmount}
+               />
+               <Button contentStyle={styles.button} onPress={() => {}}>
+                     <Text style={styles.buttonText}>Confirm</Text>
+               </Button>
+            </View>
+         </ScrollView>
       </BottomSheet>
    );
 };
@@ -31,6 +46,7 @@ const styles = StyleSheet.create({
    contentContainer: {
       flex: 1,
       padding: 10,
+      height: '100%',
    },
    textHeadline: {
       color: 'black',
