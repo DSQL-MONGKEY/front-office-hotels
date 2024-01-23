@@ -6,7 +6,18 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useGuestDataStore } from '../../state';
 
-const RoomList = ({ id, roomName, imageBanner, images, facility, qtyPerson, price, navigation }: any ) => {
+interface RoomListProps {
+   id: string,
+   roomName: string,
+   imageBanner: any,
+   images: any,
+   facility: string,
+   qtyPerson: string,
+   price: string,
+   navigation: any
+}
+
+const RoomList = ({ id, roomName, imageBanner, images, facility, qtyPerson, price, navigation }: RoomListProps ) => {
 
    const updateRoomType = useGuestDataStore((state) => state.updateRoomType);
    return (
