@@ -3,6 +3,7 @@ import logo from './logo-splash.png';
 import bgSplash from './bg-splash.png';
 import logoBrand from './logo.png';
 import logoBrandBlue from './logo-blue.png';
+import logoLandscape from './logo-landscape.png';
 import familyRoom from './family-room.png';
 import familyRoom2 from './family-room2.png';
 import familyRoom3 from './family-room3.png';
@@ -28,6 +29,7 @@ export {
    bgSplash,
    logoBrand,
    logoBrandBlue,
+   logoLandscape,
    familyRoom,
    familyRoom2,
    familyRoom3,
