@@ -51,7 +51,7 @@ const InputData = ({ type, label, placeholder, value, onChangeEvent }: InputData
          </View>
       );
    }
-   if (type === 'deposit') {
+   if (type === 'cash') {
       return (
          <View>
             <Text style={styles.label}>{label}</Text>
