@@ -12,6 +12,7 @@ type State = {
    addServices: string,
    date: string,
    roomPrice: string,
+   cashAmount: string,
 };
 
 type Action = {
@@ -25,6 +26,7 @@ type Action = {
    updateAddServices: (guestName: State['addServices']) => void,
    updateDate: (date: State['date']) => void
    updateRoomPrice: (roomPrice: State['roomPrice']) => void,
+   updateCashAmount: (cashAmount: State['cashAmount']) => void,
    reset: () => void,
 };
 
@@ -39,6 +41,7 @@ const initialState: State = {
    addServices: '',
    date: '',
    roomPrice: '',
+   cashAmount: '',
 };
 
 export const useGuestDataStore = create<State & Action>((set) => ({
@@ -72,6 +75,9 @@ export const useGuestDataStore = create<State & Action>((set) => ({
    )),
    updateRoomPrice: (roomPrice) => set(() => (
       { roomPrice: roomPrice }
+   )),
+   updateCashAmount: (cashAmount) => set(() => (
+      { cashAmount: cashAmount }
    )),
    reset: () => set(initialState),
 }));
