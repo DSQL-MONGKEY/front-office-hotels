@@ -29,22 +29,25 @@ const RoomDetails = ({ route }: any) => {
    const email = useGuestDataStore((state) => state.email);
    const updateEmail = useGuestDataStore((state) => state.updateEmail);
 
-   const phoneNum = useGuestDataStore(state => state.phoneNumber);
+   const phoneNum = useGuestDataStore((state) => state.phoneNumber);
    const updatePhoneNum = useGuestDataStore(state => state.updatePhoneNumber);
 
-   const address = useGuestDataStore(state => state.address);
+   const address = useGuestDataStore((state) => state.address);
    const updateAddress = useGuestDataStore(state => state.updateAddress);
 
-   const deposit = useGuestDataStore(state => state.deposit);
-   const updateDeposit = useGuestDataStore(state => state.updateDeposit);
+   const deposit = useGuestDataStore((state) => state.deposit);
+   const updateDeposit = useGuestDataStore((state) => state.updateDeposit);
 
-   const addServices = useGuestDataStore(state => state.addServices);
-   const updateAddServices = useGuestDataStore(state => state.updateAddServices);
+   const addServices = useGuestDataStore((state) => state.addServices);
+   const updateAddServices = useGuestDataStore((state) => state.updateAddServices);
 
-   const date = useGuestDataStore(state => state.date);
-   const updateDate = useGuestDataStore(state => state.updateDate);
+   const date = useGuestDataStore((state) => state.date);
+   const updateDate = useGuestDataStore((state) => state.updateDate);
 
-   console.log(useGuestDataStore(state => state));
+   const updateRoomPrice = useGuestDataStore((state) => state.updateRoomPrice);
+   updateRoomPrice(price);
+
+   console.log(useGuestDataStore((state) => state));
 
 
    return (
