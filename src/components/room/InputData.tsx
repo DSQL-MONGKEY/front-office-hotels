@@ -51,6 +51,23 @@ const InputData = ({ type, label, placeholder, value, onChangeEvent }: InputData
          </View>
       );
    }
+   if (type === 'deposit') {
+      return (
+         <View>
+            <Text style={styles.label}>{label}</Text>
+            <TextInput
+               value={value}
+               onChangeText={onChangeEvent}
+               inputMode={'numeric'}
+               placeholder={placeholder}
+               autoCapitalize={'none'}
+               style={[styles.contentStyle, styles.textInput]}
+               allowFontScaling
+               autoComplete={'cc-number'}
+               />
+         </View>
+      );
+   }
    if (type === 'email') {
       return (
          <View>
@@ -98,6 +115,7 @@ const InputData = ({ type, label, placeholder, value, onChangeEvent }: InputData
                autoCapitalize={'none'}
                style={[styles.contentStyle, styles.textInput]}
                allowFontScaling
+               autoComplete={'address-line1'}
                />
          </View>
       );
