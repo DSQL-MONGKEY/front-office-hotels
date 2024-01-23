@@ -11,6 +11,7 @@ const Invoice = () => {
    const phoneNum = useGuestDataStore(state => state.phoneNumber);
    const address = useGuestDataStore(state => state.address);
    const roomType = useGuestDataStore((state) => state.roomType);
+   const roomNumber = useGuestDataStore((state) => state.roomNumber);
    const deposit = useGuestDataStore(state => state.deposit);
    const addServices = useGuestDataStore(state => state.addServices);
    const date = useGuestDataStore(state => state.date);
@@ -22,7 +23,7 @@ const Invoice = () => {
          <View style={styles.container}>
             <View>
                <Icon type={'text'} />
-               <Text style={styles.textInvoice}>Inovoice</Text>
+               <Text style={styles.textInvoice}>Invoice</Text>
             </View>
             <Divider />
             <View style={styles.itemContainer}>
@@ -41,9 +42,14 @@ const Invoice = () => {
                <Text style={styles.text}>Address: </Text>
                <Text style={[styles.text, styles.wrap]}>{address}</Text>
             </View>
+            <Divider horizontalInset style={styles.divider} />
             <View style={styles.itemContainer}>
                <Text style={styles.text}>Room Type: </Text>
                <Text style={styles.text}>{roomType}</Text>
+            </View>
+            <View style={styles.itemContainer}>
+               <Text style={styles.text}>Room Number: </Text>
+               <Text style={styles.text}>{roomNumber}</Text>
             </View>
             <View style={styles.itemContainer}>
                <Text style={styles.text}>Deposit: </Text>
@@ -83,7 +89,8 @@ const styles = StyleSheet.create({
       width: '100%',
    },
    headText: {
-      fontSize: 18,
+      fontSize: 20,
+      textAlign: 'center',
       color: 'green',
       fontFamily: 'Quicksand-Bold',
       marginVertical: 10,
@@ -100,5 +107,8 @@ const styles = StyleSheet.create({
    },
    wrap: {
       width: '70%',
+   },
+   divider: {
+      marginVertical: 10,
    },
 });
