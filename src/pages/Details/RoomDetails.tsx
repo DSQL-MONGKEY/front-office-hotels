@@ -1,54 +1,38 @@
 /* eslint-disable prettier/prettier */
-import React, { useState } from 'react';
+import React from 'react';
 import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
 import InputData from '../../components/room/InputData';
 import RoomInfo from '../../components/room/RoomInfo';
 import ImageCarousel from '../../components/room/ImageCarousel';
 import RoomNumber from '../../components/room/RoomNumber';
 import { Button, Divider } from 'react-native-paper';
-import { useGuestDataStore } from '../../state';
+import { useGlobalState, useGuestDataStore } from '../../state';
 import ModalBottom from '../../components/room/ModalBottom';
 
 const RoomDetails = ({ route }: any) => {
-   const [isConfirm, setIsConfirm] = useState(false);
    // Get data from navigation params
    const { qtyPerson, roomName, images, facility, price } = route.params;
+
+   //state event handler
+   const updateGuestName = useGuestDataStore((state) => state.updateGuestName);
+   const updateEmail = useGuestDataStore((state) => state.updateEmail);
+   const updatePhoneNum = useGuestDataStore((state) => state.updatePhoneNumber);
+   const updateAddress = useGuestDataStore((state) => state.updateAddress);
+   const updateDeposit = useGuestDataStore((state) => state.updateDeposit);
+   const updateAddServices = useGuestDataStore((state) => state.updateAddServices);
+   const updateDate = useGuestDataStore((state) => state.updateDate);
+   const updateIsConfirm = useGlobalState((state) => state.updateIsConfirm);
+   const isConfirm = useGlobalState((state) => state.isConfirm);
+   console.log(useGuestDataStore((state) => state));
+
    // Event Handler
    const handleRenderItem = ({ item }: any) => <ImageCarousel images={item} />;
    const handleConfirm = () => {
-      setIsConfirm(true);
+      updateIsConfirm(true);
       if (isConfirm) {
-         setIsConfirm(false);
+         updateIsConfirm(false);
       }
    };
-
-   //state event handler
-   const guestName = useGuestDataStore((state) => state.guestName);
-   const updateGuestName = useGuestDataStore((state) => state.updateGuestName);
-
-   const email = useGuestDataStore((state) => state.email);
-   const updateEmail = useGuestDataStore((state) => state.updateEmail);
-
-   const phoneNum = useGuestDataStore((state) => state.phoneNumber);
-   const updatePhoneNum = useGuestDataStore(state => state.updatePhoneNumber);
-
-   const address = useGuestDataStore((state) => state.address);
-   const updateAddress = useGuestDataStore(state => state.updateAddress);
-
-   const deposit = useGuestDataStore((state) => state.deposit);
-   const updateDeposit = useGuestDataStore((state) => state.updateDeposit);
-
-   const addServices = useGuestDataStore((state) => state.addServices);
-   const updateAddServices = useGuestDataStore((state) => state.updateAddServices);
-
-   const date = useGuestDataStore((state) => state.date);
-   const updateDate = useGuestDataStore((state) => state.updateDate);
-
-   const updateRoomPrice = useGuestDataStore((state) => state.updateRoomPrice);
-   updateRoomPrice(price);
-
-   console.log(useGuestDataStore((state) => state));
-
 
    return (
       <>
@@ -73,48 +57,41 @@ const RoomDetails = ({ route }: any) => {
                <InputData
                   label={'Guest Name'}
                   placeholder={'Enter guest name'}
-                  value={guestName}
-                  onChangeEvent={(e) => updateGuestName(e)}
+                  onChangeEvent={updateGuestName}
                   />
                <InputData
                   type={'email'}
                   label={'Email'}
                   placeholder={'Enter email'}
-                  value={email}
                   onChangeEvent={updateEmail}
                   />
                <InputData
                   type={'tel'}
                   label={'Phone Number'}
                   placeholder={'Enter phone number'}
-                  value={phoneNum}
                   onChangeEvent={updatePhoneNum}
                   />
                <InputData
                   type={'services'}
                   label={'Address'}
                   placeholder={'Enter address'}
-                  value={address}
                   onChangeEvent={updateAddress}
                   />
                <InputData
                   type={'deposit'}
                   label={'Deposit'}
                   placeholder={'Enter deposit'}
-                  value={deposit}
                   onChangeEvent={updateDeposit}
                   />
                <InputData
                   label={'Additional Services'}
                   placeholder={'Enter services'}
-                  value={addServices}
                   onChangeEvent={updateAddServices}
                   />
                <InputData
                   type="date"
                   label={'Date'}
                   placeholder={'Enter date'}
-                  value={date}
                   onChangeEvent={updateDate}
                   />
             </View>
