@@ -1,17 +1,16 @@
 /* eslint-disable prettier/prettier */
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import React, { useState } from 'react';
-import DateTimePicker, { DateType } from 'react-native-ui-datepicker';
+import DateTimePicker from 'react-native-ui-datepicker';
 import dayjs from 'dayjs';
 interface InputDataProps {
    type?: string,
    label: React.ReactNode,
    placeholder: string,
-   value: string,
-   onChangeEvent: (e: string & DateType) => void
+   onChangeEvent: (e: any) => void
 }
 
-const InputData = ({ type, label, placeholder, value, onChangeEvent }: InputDataProps) => {
+const InputData = ({ type, label, placeholder, onChangeEvent }: InputDataProps) => {
    const [dateValue] = useState(dayjs());
 
    if (type === 'date') {
@@ -39,7 +38,6 @@ const InputData = ({ type, label, placeholder, value, onChangeEvent }: InputData
          <View>
             <Text style={styles.label}>{label}</Text>
             <TextInput
-               value={value}
                onChangeText={onChangeEvent}
                inputMode={'numeric'}
                placeholder={placeholder}
@@ -56,7 +54,6 @@ const InputData = ({ type, label, placeholder, value, onChangeEvent }: InputData
          <View>
             <Text style={styles.label}>{label}</Text>
             <TextInput
-               value={value}
                onChangeText={onChangeEvent}
                inputMode={'numeric'}
                placeholder={placeholder}
@@ -73,7 +70,6 @@ const InputData = ({ type, label, placeholder, value, onChangeEvent }: InputData
          <View>
             <Text style={styles.label}>{label}</Text>
             <TextInput
-               value={value}
                onChangeText={onChangeEvent}
                inputMode={'email'}
                placeholder={placeholder}
@@ -90,7 +86,6 @@ const InputData = ({ type, label, placeholder, value, onChangeEvent }: InputData
          <View>
             <Text style={styles.label}>{label}</Text>
             <TextInput
-               value={value}
                onChangeText={onChangeEvent}
                inputMode={'tel'}
                placeholder={placeholder}
@@ -108,7 +103,6 @@ const InputData = ({ type, label, placeholder, value, onChangeEvent }: InputData
          <View>
             <Text style={styles.label}>{label}</Text>
             <TextInput
-               value={value}
                onChangeText={onChangeEvent}
                inputMode={'text'}
                placeholder={placeholder}
@@ -125,7 +119,6 @@ const InputData = ({ type, label, placeholder, value, onChangeEvent }: InputData
          <View>
             <Text style={styles.label}>{label}</Text>
             <TextInput
-               value={value}
                onChangeText={onChangeEvent}
                inputMode={'text'}
                placeholder={placeholder}
@@ -141,7 +134,6 @@ const InputData = ({ type, label, placeholder, value, onChangeEvent }: InputData
       <View>
          <Text style={styles.label}>{label}</Text>
          <TextInput
-            value={value}
             onChangeText={onChangeEvent}
             inputMode={'text'}
             placeholder={placeholder}
