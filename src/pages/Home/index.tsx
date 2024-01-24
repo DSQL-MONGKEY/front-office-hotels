@@ -9,7 +9,7 @@ const Home = ({ navigation }: any) => {
       <View style={styles.container}>
          <FlatList
             data={roomList}
-            keyExtractor={item => item.roomName}
+            keyExtractor={(item, id) => String(id)}
             renderItem={({item}) => (
                <RoomList id={item.id} roomName={item.roomName} imageBanner={item.imageBanner} images={item.images} facility={item.facility} qtyPerson={item.qtyPerson} price={item.price} navigation={navigation} />
             )}
