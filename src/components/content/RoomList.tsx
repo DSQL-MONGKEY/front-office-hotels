@@ -7,23 +7,26 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useGuestDataStore } from '../../state';
 
 interface RoomListProps {
-   id: string,
+   id: number,
    roomName: string,
    imageBanner: any,
    images: any,
-   facility: string,
-   qtyPerson: string,
-   price: string,
+   facility: string[],
+   qtyPerson: number,
+   price: number,
    navigation: any
 }
 
 const RoomList = ({ id, roomName, imageBanner, images, facility, qtyPerson, price, navigation }: RoomListProps ) => {
 
+   const updateRoomPrice = useGuestDataStore((state) => state.updateRoomPrice);
    const updateRoomType = useGuestDataStore((state) => state.updateRoomType);
+   const keyGenerator = () => '_' + id + Math.random().toString(36).substring(2, 9);
+
    return (
       <SafeAreaView>
          <Card
-            key={id}
+            key={keyGenerator()}
             style={styles.card}
             onPress={() =>   {
                navigation.navigate('RoomDetails', {
@@ -33,6 +36,7 @@ const RoomList = ({ id, roomName, imageBanner, images, facility, qtyPerson, pric
                   qtyPerson,
                   price,
                });
+               updateRoomPrice(price);
                updateRoomType(roomName);
             }}>
             <TouchableRipple
