@@ -2,16 +2,16 @@
 import { create } from 'zustand';
 
 type State = {
-   roomNumber: string,
+   roomNumber: number,
    roomType: string,
    guestName: string,
    email: string,
    phoneNumber: string,
    address: string,
-   deposit: string,
+   deposit: number,
    addServices: string,
    date: string,
-   roomPrice: string,
+   roomPrice: number,
    cashAmount: string,
 };
 
@@ -31,16 +31,16 @@ type Action = {
 };
 
 const initialState: State = {
-   roomNumber: '',
+   roomNumber: NaN,
    roomType: '',
    guestName: '',
    email: '',
    phoneNumber: '',
    address: '',
-   deposit: '',
+   deposit: NaN,
    addServices: '',
    date: '',
-   roomPrice: '',
+   roomPrice: NaN,
    cashAmount: '',
 };
 
@@ -82,20 +82,26 @@ export const useGuestDataStore = create<State & Action>((set) => ({
    reset: () => set(initialState),
 }));
 
-type RoomState = {
-   id: string,
-   status: boolean
-}
-type RoomAction = {
-   updateStatus: (status: RoomState['status']) => void
-}
+// Global state for conditional components
+type GlobalState = {
+   isConfirm: boolean,
+   isLoading: boolean,
 
-
-export const useRoomNumber = create<RoomState & RoomAction>((set) => ({
-   id: '',
-   status: true,
-   updateStatus: (status) => set(() => (
-      { status: status }
+}
+type GlobalStateAction = {
+   updateIsConfirm: (isConfirm: GlobalState['isConfirm']) => void,
+   updateIsLoading: (isLoading: GlobalState['isLoading']) => void,
+}
+const initialGlobalState: GlobalState = {
+   isConfirm: false,
+   isLoading: false,
+};
+export const useGlobalState = create<GlobalState & GlobalStateAction>((set) => ({
+   ...initialGlobalState,
+   updateIsConfirm: (isConfirm) => set(() => (
+      { isConfirm: isConfirm }
+   )),
+   updateIsLoading: (isLoading) => set(() => (
+      { isLoading: isLoading }
    )),
 }));
-
