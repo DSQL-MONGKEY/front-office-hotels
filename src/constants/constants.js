@@ -4,19 +4,19 @@ import {compactRoom, compactRoom2, compactRoom3, deluxeRoom, deluxeRoom2, deluxe
 
 
 const availableRoomId = [
-   {id: '10', status: true},
-   {id: '13', status: true},
-   {id: '14', status: true},
-   {id: '15', status: true},
-   {id: '20', status: true},
-   {id: '25', status: true},
-   {id: '27', status: true},
-   {id: '29', status: true},
-   {id: '30', status: true},
-   {id: '31', status: true},
-   {id: '32', status: true},
-   {id: '34', status: true},
-   {id: '36', status: true},
+   {id: 10, status: true},
+   {id: 13, status: true},
+   {id: 14, status: true},
+   {id: 15, status: true},
+   {id: 20, status: true},
+   {id: 25, status: true},
+   {id: 27, status: true},
+   {id: 29, status: true},
+   {id: 30, status: true},
+   {id: 31, status: true},
+   {id: 32, status: true},
+   {id: 34, status: true},
+   {id: 36, status: true},
 ];
 
 const roomList = [
@@ -39,7 +39,7 @@ const roomList = [
          },
       ],
       qtyPerson: 15,
-      price: '3.500.000',
+      price: 3500000,
       facility: ['4 Bedroom', '2 King Bed', '2 Deluxe Bed', '4 Bathroom', 'Premiere TV', 'Netflix', 'Breakfast', 'Launch Voucher', 'Morning Tea'],
    },
    {
@@ -61,7 +61,7 @@ const roomList = [
          },
       ],
       qtyPerson: 5,
-      price: '2.500.000',
+      price: 2500000,
       facility: ['3 Bedroom', '2 Queen Bed', '1 Deluxe Bed', '2 Bathroom', 'Disney+', 'Netflix', 'Breakfast', 'Launch Voucher'],
    },
    {
@@ -83,7 +83,7 @@ const roomList = [
          },
       ],
       qtyPerson: 10,
-      price: '1.850.000',
+      price: 1850000,
       facility: ['3 Bedroom', '3 Deluxe Bed', '2 Bathroom', 'Netflix', 'Morning Tea', 'Launch Voucher'],
    },
    {
@@ -105,7 +105,7 @@ const roomList = [
          },
       ],
       qtyPerson: 4,
-      price: '850.000',
+      price: 850000,
       facility: ['2 Bedroom', '2 Bed', '2 Bathroom', 'Netflix', 'Morning Snack', 'Launch Voucher'],
    },
    {
@@ -126,7 +126,7 @@ const roomList = [
             image: zenRoom3,
          },
       ],
-      price: '1.200.000',
+      price: 1200000,
       qtyPerson: 4,
       facility: ['1 Bedroom', '2 Bed', '1 Bathroom', 'Morning tea', 'Breakfast'],
    },
@@ -148,7 +148,7 @@ const roomList = [
             image: traveRoom3,
          },
       ],
-      price: '380.000',
+      price: 380000,
       qtyPerson: 2,
       facility: ['1 Bedroom', '2 Bed', '1 Bathroom', 'Morning tea', 'snacks'],
    },
