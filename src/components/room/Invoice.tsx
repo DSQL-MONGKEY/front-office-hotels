@@ -1,25 +1,27 @@
 /* eslint-disable prettier/prettier */
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { useGuestDataStore } from '../../state';
 import { Divider } from 'react-native-paper';
 import Icon from '../Icon';
 
-const Invoice = () => {
-   const guestName = useGuestDataStore((state) => state.guestName);
-   const email = useGuestDataStore((state) => state.email);
-   const phoneNum = useGuestDataStore(state => state.phoneNumber);
-   const address = useGuestDataStore(state => state.address);
-   const roomType = useGuestDataStore((state) => state.roomType);
-   const roomNumber = useGuestDataStore((state) => state.roomNumber);
-   const deposit = useGuestDataStore(state => state.deposit);
-   const addServices = useGuestDataStore(state => state.addServices);
-   const date = useGuestDataStore(state => state.date);
-   console.log(guestName);
+interface InvoiceProps {
+   guestName: string,
+   email: string,
+   phoneNum: string,
+   address: string,
+   roomType: string,
+   roomNumber: number,
+   deposit: number,
+   addServices: string,
+   date: string,
+   roomPrice: number,
+}
+
+const Invoice = ({ guestName, email, phoneNum, address, roomType, roomNumber, deposit, addServices, date, roomPrice }: InvoiceProps) => {
 
    return (
       <>
-         <Text style={styles.headText}>Konfirmasi data dan pembayaran!</Text>
+         <Text style={styles.headText}>Confirmation Data and Payment method!</Text>
          <View style={styles.container}>
             <View>
                <Icon type={'text'} />
@@ -42,7 +44,6 @@ const Invoice = () => {
                <Text style={styles.text}>Address: </Text>
                <Text style={[styles.text, styles.wrap]}>{address}</Text>
             </View>
-            <Divider horizontalInset style={styles.divider} />
             <View style={styles.itemContainer}>
                <Text style={styles.text}>Room Type: </Text>
                <Text style={styles.text}>{roomType}</Text>
@@ -52,16 +53,21 @@ const Invoice = () => {
                <Text style={styles.text}>{roomNumber}</Text>
             </View>
             <View style={styles.itemContainer}>
-               <Text style={styles.text}>Deposit: </Text>
-               <Text style={styles.text}>Rp. {deposit}</Text>
-            </View>
-            <View style={styles.itemContainer}>
                <Text style={styles.text}>Services+ : </Text>
             <Text style={[styles.text, styles.wrap]}>{addServices}</Text>
             </View>
             <View style={styles.itemContainer}>
                <Text style={styles.text}>Date Checkout: </Text>
             <Text style={styles.text}>{date}</Text>
+            </View>
+            <Divider horizontalInset style={styles.divider} />
+            <View style={styles.itemContainer}>
+               <Text style={styles.text}>Deposit: </Text>
+               <Text style={styles.text}>Rp. {deposit}</Text>
+            </View>
+            <View style={styles.itemContainer}>
+               <Text style={styles.text}>Room Price: </Text>
+               <Text style={styles.text}>Rp. {roomPrice}</Text>
             </View>
          </View>
       </>
@@ -82,6 +88,7 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'space-between',
       marginVertical: 5,
+      width: '100%',
    },
    textContainer: {
       flex: 1,
@@ -93,7 +100,7 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       color: 'green',
       fontFamily: 'Quicksand-Bold',
-      marginVertical: 10,
+      marginVertical: 5,
    },
    textInvoice: {
       fontSize: 20,
@@ -104,6 +111,7 @@ const styles = StyleSheet.create({
       color: 'black',
       fontSize: 15,
       fontFamily: 'Poppins-Medium',
+      textAlign: 'right',
    },
    wrap: {
       width: '70%',
