@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useCallback, useMemo, useRef } from 'react';
-import BottomSheet, { BottomSheetBackdrop, BottomSheetModalProvider, BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetBackdrop, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { StyleSheet, View } from 'react-native';
 import Invoice from './Invoice';
 import { Button } from 'react-native-paper';
@@ -45,6 +45,7 @@ const ModalBottom = () => {
          dateCheckout: date,
          deposit: deposit,
          roomPrice: roomPrice,
+         cashAmount: cashAmount,
       });
    };
    const handlePress = () => {
@@ -55,7 +56,6 @@ const ModalBottom = () => {
    }, []);
 
    return (
-      <BottomSheetModalProvider>
          <BottomSheet
          ref={bottomSheetRef}
          snapPoints={snapPoints}
@@ -97,7 +97,6 @@ const ModalBottom = () => {
                </View>
          </BottomSheetScrollView>
       </BottomSheet>
-      </BottomSheetModalProvider>
    );
 };
 
