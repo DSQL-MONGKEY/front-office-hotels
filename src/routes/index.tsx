@@ -32,7 +32,11 @@ const MainApp = () => {
          <Tab.Screen
             name="Guest list"
             component={GuestList}
-            options={{ headerShown: false }} />
+            options={{
+               headerTitle: () => <Icon  />,
+               headerTitleAlign: 'center',
+            }}
+            />
          <Tab.Screen
             name="Services"
             component={Service}
