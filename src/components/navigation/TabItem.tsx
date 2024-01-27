@@ -22,7 +22,7 @@ const TabItem = ({ isFocused, onPress, onLongPress, label }: any) => {
       },
    });
 
-   const Icon = ({ style }: any) => {
+   const Icon:any = ({ style }: any) => {
       if (label === 'Home') {
          return (
             isFocused ?
