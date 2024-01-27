@@ -3,6 +3,7 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 import React, { useState } from 'react';
 import DateTimePicker from 'react-native-ui-datepicker';
 import dayjs from 'dayjs';
+import { useGuestDataStore } from '../../state';
 interface InputDataProps {
    type?: string,
    label: React.ReactNode,
@@ -12,6 +13,7 @@ interface InputDataProps {
 
 const InputData = ({ type, label, placeholder, onChangeEvent }: InputDataProps) => {
    const [dateValue] = useState(dayjs());
+   const updateDateNow = useGuestDataStore((state) => state.updateDateNow);
 
    if (type === 'date') {
       return (
@@ -19,7 +21,8 @@ const InputData = ({ type, label, placeholder, onChangeEvent }: InputDataProps) 
             <DateTimePicker
             value={dateValue}
             onValueChange={(date: any) => {
-                  onChangeEvent(date);
+               onChangeEvent(date);
+               updateDateNow(dateValue.format('YYYY-MM-DD HH:mm').toString());
             }}
             displayFullDays={true}
             headerTextStyle={styles.calenderTextStyles}
