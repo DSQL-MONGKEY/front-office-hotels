@@ -7,8 +7,8 @@ import { Button } from 'react-native-paper';
 import { Text } from 'react-native';
 import InputData from './InputData';
 import { useGlobalState, useGuestDataStore } from '../../state';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
-import { FIREBASE_APP, FIREBASE_DB } from '../../../FirebaseConfig';
+import { addDoc, collection } from 'firebase/firestore';
+import { FIREBASE_DB } from '../../../FirebaseConfig';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const ModalBottom = () => {
@@ -25,6 +25,7 @@ const ModalBottom = () => {
    const deposit = useGuestDataStore((state) => state.deposit);
    const addServices = useGuestDataStore((state) => state.addServices);
    const date = useGuestDataStore((state) => state.date);
+   const dateNow = useGuestDataStore((state) => state.dateNow);
    const roomPrice = useGuestDataStore((state) => state.roomPrice);
    const cashAmount = useGuestDataStore((state) => state.cashAmount);
 
@@ -32,7 +33,7 @@ const ModalBottom = () => {
    const updateIsConfirm = useGlobalState((state) => state.updateIsConfirm);
 
 
-   const testdoc = async() => {
+   const addGuest = async() => {
       await addDoc(collection(FIREBASE_DB, 'guests-data'), {
          guestName: guestName,
          email: email,
@@ -41,11 +42,12 @@ const ModalBottom = () => {
          roomType: roomType,
          roomNumber: roomNumber,
          addServices: addServices,
-         dateCheckin: serverTimestamp(),
+         dateCheckin: dateNow,
          dateCheckout: date,
          deposit: deposit,
          roomPrice: roomPrice,
          cashAmount: cashAmount,
+         done: true,
       });
    };
    const handlePress = () => {
@@ -90,7 +92,7 @@ const ModalBottom = () => {
                   />
                   <Button
                      contentStyle={styles.button}
-                     onPress={() => testdoc()}
+                     onPress={() => addGuest()}
                   >
                      <Text style={styles.buttonText}>Confirm</Text>
                   </Button>
