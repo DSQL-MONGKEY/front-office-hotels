@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
       width: '100%',
    },
    logo: {
-      width: 70,
-      height: 70,
+      width: 45,
+      height: 45,
    },
    backButton: {
       fontSize: 30,
