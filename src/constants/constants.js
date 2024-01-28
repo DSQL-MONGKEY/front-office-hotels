@@ -78,7 +78,7 @@ const roomList = [
             image: deluxeRoom2,
          },
          {
-            id: 1,
+            id: 3,
             image: deluxeRoom3,
          },
       ],
@@ -100,7 +100,7 @@ const roomList = [
             image: compactRoom2,
          },
          {
-            id: 1,
+            id: 3,
             image: compactRoom3,
          },
       ],
