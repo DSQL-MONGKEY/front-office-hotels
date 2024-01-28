@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { StyleSheet, Text} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
-import { Card, TouchableRipple } from 'react-native-paper';
+import { Card } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useGuestDataStore } from '../../state';
@@ -39,9 +39,7 @@ const RoomList = ({ id, roomName, imageBanner, images, facility, qtyPerson, pric
                updateRoomPrice(price);
                updateRoomType(roomName);
             }}>
-            <TouchableRipple
-               rippleColor="rgba(0, 0, 0, .32)"
-            >
+            <TouchableOpacity>
             <Card.Content style={styles.content}>
                <Text style={styles.title}>
                   {roomName}
@@ -53,7 +51,7 @@ const RoomList = ({ id, roomName, imageBanner, images, facility, qtyPerson, pric
                      style={styles.icon} />
                </Text>
             </Card.Content>
-            </TouchableRipple>
+            </TouchableOpacity>
             <Card.Cover source={imageBanner} />
          </Card>
       </SafeAreaView>
