@@ -1,17 +1,39 @@
 /* eslint-disable prettier/prettier */
-import { StyleSheet, Text } from 'react-native';
-import React from 'react';
-import { TouchableRipple } from 'react-native-paper';
+import { collection, onSnapshot } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
+import { Image, StyleSheet, View, FlatList } from 'react-native';
+import { FIREBASE_DB } from '../../../FirebaseConfig';
+import ServiceList from '../../components/content/ServiceList';
 
 const Service = () => {
+   const [services, setServices] = useState<any>([]);
+
+   useEffect(() => {
+      const serviceListRef = collection(FIREBASE_DB, 'services');
+      const subscriber = onSnapshot(serviceListRef, {
+         next: (snapshot) => {
+            const service: object[] = [];
+            snapshot.docs.forEach((doc) => {
+               service.push({
+                  id: doc.id,
+                  ...doc.data(),
+               });
+            });
+            setServices(service);
+         },
+      });
+      return () => subscriber();
+   },[]);
+
    return (
-      <TouchableRipple
-         onPress={() => console.log('Pressed')}
-         rippleColor="rgba(0, 0, 0, .32)"
-         style={styles.container}
-      >
-      <Text>Press anywhere</Text>
-      </TouchableRipple>
+      <View style={styles.container}>
+         <FlatList
+            data={services}
+            keyExtractor={(item, id) => String(id)}
+            renderItem={({item}) => <ServiceList />}
+            showsVerticalScrollIndicator={false}
+         />
+      </View>
    );
 };
 
@@ -20,5 +42,7 @@ export default Service;
 const styles = StyleSheet.create({
    container: {
       flex: 1,
+      alignContent: 'center',
+      paddingHorizontal: 20,
    },
 });

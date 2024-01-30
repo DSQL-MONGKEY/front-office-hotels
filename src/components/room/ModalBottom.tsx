@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useCallback, useMemo, useRef } from 'react';
-import BottomSheet, { BottomSheetBackdrop, BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import { StyleSheet, View } from 'react-native';
 import Invoice from './Invoice';
 import { Button } from 'react-native-paper';
@@ -10,10 +10,11 @@ import { useGlobalState, useGuestDataStore } from '../../state';
 import { addDoc, collection } from 'firebase/firestore';
 import { FIREBASE_DB } from '../../../FirebaseConfig';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const ModalBottom = () => {
    const snapPoints = useMemo(() => ['50%', '90%'], []);
-   const bottomSheetRef = useRef(null);
+   const bottomSheetRef = useRef<BottomSheet>(null);
    const renderBackdrop = useCallback((props: any) => <BottomSheetBackdrop appearsOnIndex={0} disappearsOnIndex={-1} {...props} />, []);
 
    const guestName = useGuestDataStore((state) => state.guestName);
@@ -31,7 +32,7 @@ const ModalBottom = () => {
 
    const updateCashAmount = useGuestDataStore((state) => state.updateCashAmount);
    const updateIsConfirm = useGlobalState((state) => state.updateIsConfirm);
-
+   const resetState = useGuestDataStore((state) => state.reset);
 
    const addGuest = async() => {
       await addDoc(collection(FIREBASE_DB, 'guests-data'), {
@@ -47,15 +48,17 @@ const ModalBottom = () => {
          deposit: deposit,
          roomPrice: roomPrice,
          cashAmount: cashAmount,
-         done: true,
+         done: false,
       });
+      resetState();
    };
-   const handlePress = () => {
+   const handleCloseIcon = () => {
       updateIsConfirm(false);
    };
    const handleSheetChanges = useCallback((index: number) => {
       console.log('handleSheetChanges', index);
-   }, []);
+      index < 0 && updateIsConfirm(false);
+   }, [updateIsConfirm]);
 
    return (
          <BottomSheet
@@ -66,10 +69,10 @@ const ModalBottom = () => {
          backdropComponent={renderBackdrop}
          onChange={handleSheetChanges}
          >
-         <BottomSheetScrollView>
+         <ScrollView>
             <View style={styles.iconContainer}>
                <MaterialCommunityIcons
-                  name={'close-octagon-outline'} style={styles.closeIcon} onPress={handlePress} />
+                  name={'close-octagon-outline'} style={styles.closeIcon} onPress={handleCloseIcon} />
             </View>
             <View style={styles.contentContainer}>
                   <Invoice
@@ -97,7 +100,7 @@ const ModalBottom = () => {
                      <Text style={styles.buttonText}>Confirm</Text>
                   </Button>
                </View>
-         </BottomSheetScrollView>
+         </ScrollView>
       </BottomSheet>
    );
 };
@@ -115,7 +118,7 @@ const styles = StyleSheet.create({
       fontSize: 20,
    },
    button: {
-      backgroundColor: '#86A7FC',
+      backgroundColor: '#00AA13',
       marginHorizontal: 20,
       marginVertical: 10,
       height: 60,
@@ -127,7 +130,7 @@ const styles = StyleSheet.create({
    buttonText: {
       fontSize: 20,
       padding: 50,
-      fontFamily: 'Quicksand-Bold',
+      fontFamily: 'Maison',
       color: 'white',
    },
    indicator: {
@@ -142,6 +145,7 @@ const styles = StyleSheet.create({
    },
    closeIcon:{
       fontSize: 30,
-      color: '#B6C4B6',
+      color: 'black',
+      opacity: 0.2,
    },
 });

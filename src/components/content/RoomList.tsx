@@ -24,37 +24,33 @@ const RoomList = ({ id, roomName, imageBanner, images, facility, qtyPerson, pric
    const keyGenerator = () => '_' + id + Math.random().toString(36).substring(2, 9);
 
    return (
-      <SafeAreaView>
-         <Card
-            key={keyGenerator()}
-            style={styles.card}
-            onPress={() =>   {
-               navigation.navigate('RoomDetails', {
-                  roomName,
-                  images,
-                  facility,
-                  qtyPerson,
-                  price,
-               });
-               updateRoomPrice(price);
-               updateRoomType(roomName);
-            }}>
-            <TouchableOpacity>
-            <Card.Content style={styles.content}>
-               <Text style={styles.title}>
-                  {roomName}
-               </Text>
-               <Text style={styles.title}>
-                  {qtyPerson}
-                  <Ionicons
-                     name="person-outline"
-                     style={styles.icon} />
-               </Text>
-            </Card.Content>
-            </TouchableOpacity>
-            <Card.Cover source={imageBanner} />
-         </Card>
-      </SafeAreaView>
+      <Card
+         key={keyGenerator()}
+         style={styles.card}
+         onPress={() =>   {
+            navigation.navigate('RoomDetails', {
+               roomName,
+               images,
+               facility,
+               qtyPerson,
+               price,
+            });
+            updateRoomPrice(price);
+            updateRoomType(roomName);
+         }}>
+         <Card.Content style={styles.content}>
+            <Text style={styles.title}>
+               {roomName}
+            </Text>
+            <Text style={styles.title}>
+               {qtyPerson}
+               <Ionicons
+                  name="person-outline"
+                  style={styles.icon} />
+            </Text>
+         </Card.Content>
+         <Card.Cover source={imageBanner} />
+      </Card>
    );
 };
 
@@ -64,8 +60,8 @@ const styles = StyleSheet.create({
    card: {
       flex: 1,
       backgroundColor: '#FFFFFF',
-      gap: 10,
       margin: 10,
+      elevation: 4,
    },
    imageCard: {
       alignItems: 'center',
@@ -87,9 +83,9 @@ const styles = StyleSheet.create({
    },
 
    title: {
-      margin: 10,
+      marginBottom: 10,
       fontSize: 17,
-      color: '#161A30',
-      fontFamily: 'Poppins-Medium',
+      color: '#86A7FC',
+      fontFamily: 'Maison',
    },
 });
