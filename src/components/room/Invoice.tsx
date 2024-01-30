@@ -96,10 +96,10 @@ const styles = StyleSheet.create({
       width: '100%',
    },
    headText: {
-      fontSize: 20,
+      fontSize: 30,
       textAlign: 'center',
-      color: 'green',
-      fontFamily: 'Quicksand-Bold',
+      color: '#00AA13',
+      fontFamily: 'Maison',
       marginVertical: 5,
    },
    textInvoice: {
