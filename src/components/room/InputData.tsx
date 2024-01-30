@@ -153,8 +153,8 @@ export default InputData;
 const styles = StyleSheet.create({
    label: {
       fontSize: 20,
-      color: 'black',
-      fontFamily: 'Quicksand-Bold',
+      color: '#000000',
+      fontFamily: 'Maison',
    },
    textInput: {
       backgroundColor: '#f8f9fa',
