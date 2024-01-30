@@ -23,7 +23,6 @@ const RoomDetails = ({ route }: any) => {
    const updateDate = useGuestDataStore((state) => state.updateDate);
    const updateIsConfirm = useGlobalState((state) => state.updateIsConfirm);
    const isConfirm = useGlobalState((state) => state.isConfirm);
-   console.log(useGuestDataStore((state) => state));
 
    // Event Handler
    const handleRenderItem = ({ item }: any) => <ImageCarousel images={item} />;
@@ -96,11 +95,11 @@ const RoomDetails = ({ route }: any) => {
                   />
             </View>
             <Button contentStyle={styles.button} onPress={handleConfirm}>
-               <Text style={styles.buttonText}>Confirm</Text>
+               <Text style={styles.buttonText}>Continue</Text>
             </Button>
          </ScrollView>
          {isConfirm &&
-            <ModalBottom/>
+            <ModalBottom />
          }
       </>
    );
@@ -124,7 +123,7 @@ const styles = StyleSheet.create({
       borderRadius: 20,
    },
    button: {
-      backgroundColor: '#86A7FC',
+      backgroundColor: '#00AA13',
       marginHorizontal: 20,
       marginVertical: 10,
       height: 60,
