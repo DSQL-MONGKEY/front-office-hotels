@@ -41,16 +41,19 @@ const RoomInfo = ({ qtyPerson, roomName, facility, price }: roomInfoProps) => {
                Checked
             </Text>
          </View>
-         <Text style={styles.textRules}>
-         Verification:
-            Verify the guest's identity by asking for a valid ID or passport.
-            Cross-check the guest's information with the reservation details.
-         </Text>
-         <Text style={styles.textRules}>
-         Confirmation of Stay:
-            Confirm the guest's reservation details, including the check-in and check-out dates.
-            Ensure any special requests or preferences are noted.
-         </Text>
+         <View style={styles.warnContainer}>
+            <Ionicons name={'warning'} style={styles.warn} />
+            <Text style={styles.textRules}>
+            Verification:
+               Verify the guest's identity by asking for a valid ID or passport.
+               Cross-check the guest's information with the reservation details.
+            </Text>
+            <Text style={styles.textRules}>
+            Confirmation of Stay:
+               Confirm the guest's reservation details, including the check-in and check-out dates.
+               Ensure any special requests or preferences are noted.
+            </Text>
+         </View>
       </View>
    );
 };
@@ -68,6 +71,15 @@ const styles = StyleSheet.create({
    },
    infoContainerTitle: {
       flex: 2,
+   },
+   warnContainer: {
+      marginVertical: 30,
+   },
+   warn: {
+      marginBottom: 10,
+      fontSize: 40,
+      color: 'red',
+      textAlign: 'center',
    },
    infoTitle: {
       fontFamily: 'Quicksand-Bold',
@@ -95,7 +107,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#86A7FC',
    },
    descText: {
-      fontFamily: 'Quicksand-Bold',
+      fontFamily: 'Maison',
       fontSize: 15,
       color: '#ffffff',
    },
@@ -108,7 +120,7 @@ const styles = StyleSheet.create({
    },
    textRules: {
       fontSize: 15,
-      color: '#86A7FC',
+      color: '#00AA13',
       fontFamily: 'Quicksand-Bold',
       paddingHorizontal: 10,
    },
