@@ -2,6 +2,10 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "src/assets/fonts/Maison.ttf",
+      "sha1": "4def3d80b6b3b89f7176710862ae58c4c2ab55e4"
+    },
+    {
       "path": "src/assets/fonts/Outfit-Medium.ttf",
       "sha1": "accdc4a94720336a48bb6fd31759bbfa268f902e"
     },
