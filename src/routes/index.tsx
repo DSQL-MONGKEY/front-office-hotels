@@ -14,9 +14,28 @@ import GuestList from '../pages/GuestList';
 import Service from '../pages/Service';
 import RoomDetails from '../pages/Details/RoomDetails';
 import Icon from '../components/Icon';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import ActiveGuests from '../pages/GuestList/ActiveGuests';
+import InactiveGuests from '../pages/GuestList/InactiveGuests';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+const TopTab = createMaterialTopTabNavigator();
+
+const TopTabsGroup = () => {
+   return (
+      <TopTab.Navigator>
+         <TopTab.Screen
+            name="Active Guests"
+            component={ActiveGuests}
+         />
+         <TopTab.Screen
+            name="Inactive Guest"
+            component={InactiveGuests}
+         />
+      </TopTab.Navigator>
+   );
+};
 
 const MainApp = () => {
    return (
@@ -31,8 +50,7 @@ const MainApp = () => {
             />
          <Tab.Screen
             name="Guest list"
-            component={GuestList}
-            options={{ headerShown: false }}
+            component={TopTabsGroup}
             />
          <Tab.Screen
             name="Services"
