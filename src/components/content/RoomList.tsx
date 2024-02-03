@@ -1,8 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { StyleSheet, Text, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import React from 'react';
 import { Card } from 'react-native-paper';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useGuestDataStore } from '../../state';
 
