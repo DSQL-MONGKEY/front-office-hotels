@@ -10,7 +10,6 @@ import Splash from '../pages/Splash';
 import Home from '../pages/Home';
 import Account from '../pages/Account';
 import { BottomNavigator } from '../components';
-import GuestList from '../pages/GuestList';
 import Service from '../pages/Service';
 import RoomDetails from '../pages/Details/RoomDetails';
 import Icon from '../components/Icon';
