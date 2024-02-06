@@ -1,22 +1,29 @@
 /* eslint-disable prettier/prettier */
 import React, { useCallback, useMemo, useRef } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
-import { StyleSheet, View } from 'react-native';
-import Invoice from './Invoice';
 import { Button } from 'react-native-paper';
-import { Text } from 'react-native';
-import InputData from './InputData';
 import { useGlobalState, useGuestDataStore } from '../../state';
 import { addDoc, collection } from 'firebase/firestore';
 import { FIREBASE_DB } from '../../../FirebaseConfig';
+import Invoice from './Invoice';
+import InputData from './InputData';
+import Toast from 'react-native-toast-message';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const ModalBottom = () => {
+   // BottomSheet
    const snapPoints = useMemo(() => ['50%', '90%'], []);
    const bottomSheetRef = useRef<BottomSheet>(null);
-   const renderBackdrop = useCallback((props: any) => <BottomSheetBackdrop appearsOnIndex={0} disappearsOnIndex={-1} {...props} />, []);
+   const renderBackdrop = useCallback((props: any) =>(
+      <BottomSheetBackdrop
+         appearsOnIndex={0}
+         disappearsOnIndex={-1} {...props}
+      />
+   ), []);
 
+   // State
    const guestName = useGuestDataStore((state) => state.guestName);
    const email = useGuestDataStore((state) => state.email);
    const phoneNum = useGuestDataStore((state) => state.phoneNumber);
@@ -29,39 +36,56 @@ const ModalBottom = () => {
    const dateNow = useGuestDataStore((state) => state.dateNow);
    const roomPrice = useGuestDataStore((state) => state.roomPrice);
    const cashAmount = useGuestDataStore((state) => state.cashAmount);
-
    const updateCashAmount = useGuestDataStore((state) => state.updateCashAmount);
    const updateIsConfirm = useGlobalState((state) => state.updateIsConfirm);
-   const resetState = useGuestDataStore((state) => state.reset);
 
-   const addGuest = async() => {
-      await addDoc(collection(FIREBASE_DB, 'guests-data'), {
-         guestName: guestName,
-         email: email,
-         phoneNumber: phoneNum,
-         address: address,
-         roomType: roomType,
-         roomNumber: roomNumber,
-         addServices: addServices,
-         dateCheckin: dateNow,
-         dateCheckout: date,
-         deposit: deposit,
-         roomPrice: roomPrice,
-         cashAmount: cashAmount,
-         done: false,
+   // Toast
+   const toastHandler = () => {
+      Toast.show({
+         type: 'success',
+         text1: 'Data Success Stored',
+         text2: 'Please check on the guest list page',
       });
-      resetState();
    };
+
+   //Close icon
    const handleCloseIcon = () => {
       updateIsConfirm(false);
    };
+
+   // BottomSheet height changes
    const handleSheetChanges = useCallback((index: number) => {
-      console.log('handleSheetChanges', index);
       index < 0 && updateIsConfirm(false);
    }, [updateIsConfirm]);
+   const closeBottomSheet = () => bottomSheetRef.current?.close();
+
+   // Add document
+   const addGuest = async() => {
+      try {
+         await addDoc(collection(FIREBASE_DB, 'guests-data'), {
+            guestName: guestName,
+            email: email,
+            phoneNumber: phoneNum,
+            address: address,
+            roomType: roomType,
+            roomNumber: roomNumber,
+            addServices: addServices,
+            dateCheckin: dateNow,
+            dateCheckout: date,
+            deposit: deposit,
+            roomPrice: roomPrice,
+            cashAmount: cashAmount,
+            done: false,
+         });
+      } catch (e: any) {
+         console.log(e.message);
+      }
+      toastHandler();
+      closeBottomSheet();
+   };
 
    return (
-         <BottomSheet
+      <BottomSheet
          ref={bottomSheetRef}
          snapPoints={snapPoints}
          enableContentPanningGesture={false}
@@ -95,7 +119,7 @@ const ModalBottom = () => {
                   />
                   <Button
                      contentStyle={styles.button}
-                     onPress={() => addGuest()}
+                     onPress={addGuest}
                   >
                      <Text style={styles.buttonText}>Confirm</Text>
                   </Button>
