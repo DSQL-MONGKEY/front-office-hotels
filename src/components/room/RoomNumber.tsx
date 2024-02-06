@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable react-native/no-inline-styles */
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
 import { availableRoomId } from '../../constants/constants';
