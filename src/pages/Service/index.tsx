@@ -30,7 +30,7 @@ const Service = () => {
          <FlatList
             data={services}
             keyExtractor={(item, id) => String(id)}
-            renderItem={({item}) => <ServiceList />}
+            renderItem={({item}) => <ServiceList item={item} />}
             showsVerticalScrollIndicator={false}
          />
       </View>
