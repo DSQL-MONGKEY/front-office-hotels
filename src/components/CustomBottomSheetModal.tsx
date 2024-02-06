@@ -2,6 +2,9 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useMemo, forwardRef } from 'react';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
+
+
+
 export type Ref = BottomSheetModal;
 const CustomBottomSheetModal = forwardRef<Ref>((props, ref) => {
    const snapPoints = useMemo(() => ['50%', '85%'], []);
