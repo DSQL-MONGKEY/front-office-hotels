@@ -1,10 +1,10 @@
 /* eslint-disable prettier/prettier */
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, StatusBar, SafeAreaView, Image, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, StatusBar, Image, FlatList } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { FIREBASE_DB } from '../../../FirebaseConfig';
-import { collection, onSnapshot } from 'firebase/firestore';
+import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import CustomBottomSheetModal from '../../components/CustomBottomSheetModal';
 import { empty } from '../../assets';
 import SkeletonList from '../../components/SkeletonList';
@@ -15,16 +15,18 @@ const InactiveGuests = () => {
 
    useEffect(() => {
       const guestListRef = collection(FIREBASE_DB, 'guests-data');
-      const subscriber = onSnapshot(guestListRef, {
+      const q = query(guestListRef, orderBy('dateCheckin', 'desc'));
+      const subscriber = onSnapshot(q, {
          next: (snapshot) => {
-            const guest: object[] = [];
+            const guest: any[] = [];
             snapshot.docs.forEach((doc) => {
                guest.push({
                   id: doc.id,
                   ...doc.data(),
                });
             });
-            setGuests(guest);
+            const filteredGuets = guest.filter((data) => data.done === true);
+            setGuests(filteredGuets);
          },
       });
       return () => subscriber();
@@ -33,7 +35,6 @@ const InactiveGuests = () => {
    const renderDoneItem = ({item}: any) => {
       return (
          <TouchableOpacity>
-            {item.done &&
                <View key={item.id} style={styles.cardContainer}>
                   <View style={[styles.roomType, { backgroundColor: item.done && '#00AA13' }]}>
                      <Text style={styles.roomText}>{item.roomType}</Text>
@@ -57,23 +58,13 @@ const InactiveGuests = () => {
                      </View>
                   </View>
                </View>
-            }
          </TouchableOpacity>
       );
    };
    return (
-      <SafeAreaView style={styles.container}>
-         {guests.length < 0 ?
+      <View>
+         {guests.length > 0 ?
             (
-               <View style={styles.emptyContainer}>
-               <Image source={empty} style={styles.emptyImage} />
-               <Text style={styles.emptyText}>
-                  No Guests Yet
-               </Text>
-            </View>
-            ) : (
-               <>
-               <Text style={styles.headText}>Inactive Guest</Text>
                <FlatList
                   data={guests}
                   renderItem={renderDoneItem}
@@ -82,11 +73,17 @@ const InactiveGuests = () => {
                   showsVerticalScrollIndicator={false}
                   ListEmptyComponent={<SkeletonList/>}
                />
-            </>
+            ) : (
+               <View style={styles.emptyContainer}>
+                  <Image source={empty} style={styles.emptyImage} />
+                  <Text style={styles.emptyText}>
+                     No Guests Yet
+                  </Text>
+               </View>
             )
          }
          <CustomBottomSheetModal ref={bottomSheetRef} />
-      </SafeAreaView>
+      </View>
    );
 };
 
@@ -102,17 +99,15 @@ const styles = StyleSheet.create({
       gap: 5,
    },
    cardContainer: {
-      backgroundColor: '#EAEAEA',
+      backgroundColor: '#C3E2C2',
       borderRadius: 10,
       marginBottom: 20,
    },
    flatList: {
-      backgroundColor: 'white',
       paddingHorizontal: 10,
       paddingVertical: 10,
-      height: '50%',
+      height: '100%',
       borderRadius: 10,
-      elevation: 4,
    },
    roomType: {
       flexDirection: 'row',
