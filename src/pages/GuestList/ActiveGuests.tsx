@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { collection, onSnapshot } from 'firebase/firestore';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, StatusBar } from 'react-native';
 import { FIREBASE_DB } from '../../../FirebaseConfig';
@@ -15,7 +15,8 @@ const ActiveGuests = () => {
 
    useEffect(() => {
       const guestListRef = collection(FIREBASE_DB, 'guests-data');
-      const subscriber = onSnapshot(guestListRef, {
+      const qStore = query(guestListRef, orderBy('dateCheckin', 'desc'));
+      const subscriber = onSnapshot(qStore, {
          next: (snapshot) => {
             const guest: object[] = [];
             snapshot.docs.forEach((doc) => {
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
       gap: 5,
    },
    cardContainer: {
-      backgroundColor: 'violet',
+      backgroundColor: '#7BD3EA',
       borderRadius: 10,
       marginBottom: 20,
    },
