@@ -1,11 +1,11 @@
 /* eslint-disable prettier/prettier */
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 
-const ServiceList = () => {
+const ServiceList = ({ item }: any) => {
    return (
       <View>
-         <Text>ServiceList</Text>
+         <Image source={item.link} />
       </View>
    );
 };
